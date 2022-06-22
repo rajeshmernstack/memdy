@@ -1,0 +1,38 @@
+<div class="card mt-3 mb-3 shadow-5-strong border">
+    <div class="card-header row">
+        <div class="col-11">
+            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="50"
+                alt="Meme" loading="lazy" />
+            <%= username %> 
+        </div>
+        <div class="col-1">
+            <div class="dropdown">
+                <button type="button" class="btn shadow-0" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-ellipsis-vertical fa-2x"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bookmark text-success"></i> Save Meme</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-eye-slash text-warning"></i> Hide Meme</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-ban text-danger"></i> Report Meme</a></li>
+                </ul>
+              </div>
+        </div>
+    </div>
+    <div class="card-body text-center">
+        <img class="img-thumbnail border-0 hover-shadow"
+            src="<%= path %> " loading="lazy" alt="meme"
+            height="400" width="400">
+    </div>
+    <div class="card-footer row text-center">
+        <div class="col">
+            <a href="#!" class="btn rounded-pill shadow-5-strong border border-danger"><i class="far fa-thumbs-up fa-2x text-danger"></i> <span><%= likes %></span> </a>
+        </div>
+        <div class="col">
+            <a href="#!" class="btn rounded-pill shadow-5-strong border border-primary"><i
+                    class="far fa-comment-alt fa-2x text-primary"></i> <span><%= comments %></span></a>
+        </div>
+        <div class="col">
+            <a href="#!" class="btn rounded-pill shadow-5-strong border border-success"><i class="fa-solid fa-share fa-2x text-success"></i> <span><%= shares %></span></a>
+        </div>
+    </div>
+</div>

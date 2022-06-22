@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css" rel="stylesheet" />
+    <title>Home</title>
+</head>
+
+<body>
+    <%- include('./partials/header.ejs') %>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-5 offset-md-3">
+                <%- include('./partials/MemeCard.ejs', {username: "Rajesh Kumar", path: "https://i.pinimg.com/474x/20/c7/4c/20c74caea9aaa8b1094d852d50376cb6.jpg", likes: 200, comments: 10, shares: 150}) %>
+                <%- include('./partials/MemeCard.ejs', {username: "Ghulam Hussain", path: "https://i.pinimg.com/564x/a5/04/c6/a504c62595a8a4ffd2094537aca3f17c.jpg", likes: 240, comments: 38, shares: 85}) %> 
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.js"></script>
+
+</body>
+
+</html>
