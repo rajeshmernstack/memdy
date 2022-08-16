@@ -79,15 +79,14 @@ const resetPassword = async (req, res, next) => {
                         const salt = await bcrypt.genSalt(10)
                         const hashPassword = await bcrypt.hash(req.body.new_pass, salt);
                         await User.findByIdAndUpdate({ _id: decorded.userID }, { password: hashPassword });
-                        res.json({ success: 1, message: 'Password Channged Successfully' });
+                        res.json({ status: 1, message: 'Password Channged Successfully' });
                     }
                 } else {
-                    res.json({ success: 0, message: 'User does not match' })
+                    res.json({ status: 0, message: 'User does not match' })
                 }
             }
         });
     }
-
 }
 
 const sendPsswordResetEmail = async (req, res, next) => {

@@ -48,7 +48,7 @@ app.get('/admin', (req, res) => {
 
 app.get('/design', (req, res) => {
     console.log(req.query)
-    res.render("tool")
+    res.render("Tool/tool")
 })
 
 app.listen(process.env.APP_PORT);
