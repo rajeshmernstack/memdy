@@ -1,3 +1,59 @@
 .tool-navbar {
-    background-image: linear-gradient(to right,#1DC4CC, #826DE8);
+    background-image: linear-gradient(to right, #1DC4CC, #826DE8);
+}
+
+.nav-tabs .nav-link {
+    padding: 15px 0px 0px 0px !important;
+}
+
+/* 
+.nav {
+    background-color: #18191B;
+} */
+
+/* .nav-link {
+    color: #E8E8E8 !important;
+} */
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    background-color: #586DEC !important;
+    border: 0;
+    color: white !important;
+    border-radius: 20px
+}
+
+/* 
+.wrap {
+    max-width: 900px;
+    margin: 0 auto;
+} */
+
+.different-sizes-images-container {
+    column-count: 2;
+    max-width: 100%;
+    margin: 0 auto;
+    /* padding: 1px; */
+}
+
+.different-sizes-images-container>img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* margin-left: 5px; */
+    /* margin-bottom: 1px; */
+    /* padding:px; */
+    box-sizing: border-box;
+}
+
+.card-footer {
+    padding: 0rem 0rem !important;
+}
+
+div.custom-scrollbar {
+    /* width: 300px; */
+    height: 730px;
+    overflow: auto;
+    scrollbar-color: #6969dd #f70202;
+    scrollbar-width: thin;
 }

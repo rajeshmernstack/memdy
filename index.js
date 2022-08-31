@@ -16,7 +16,6 @@ app.use(express.json())
 dotenv.config()
 
 
-
 app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
 

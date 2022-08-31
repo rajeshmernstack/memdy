@@ -1,38 +1,96 @@
 <div class="col-md-4 row">
-    <div class="col-md-4">
+    <div class="col-md-3 border">
         <!-- Tab navs -->
-        <div class="nav flex-column nav-tabs text-center" id="v-tabs-tab" role="tablist"
-            aria-orientation="vertical">
-            <a class="nav-link active" id="v-tabs-home-tab" data-mdb-toggle="tab" href="#v-tabs-home"
-                role="tab" aria-controls="v-tabs-home" aria-selected="true">
-                <img class="mb-1" src="images/typography.png" alt="typography" height="50" width="50">
-                Templates
+        <div class="nav flex-column nav-tabs text-center" id="v-tabs-tab" role="tablist" aria-orientation="vertical">
+            <!-- Templates Tab -->
+            <a class="nav-link active" id="v-tabs-templates-tab" data-mdb-toggle="tab" href="#v-tabs-templates"
+                role="tab" aria-controls="v-tabs-templates" aria-selected="true">
+                <!-- <img class="mb-1" src="images/typography.png" alt="typography" height="50" width="50"> -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M19.5 10V5a.5.5 0 0 0-.5-.5h-4.5V10h5zm0 1.5h-5v8H19a.5.5 0 0 0 .5-.5v-7.5zm-6.5-7H5a.5.5 0 0 0-.5.5v14c0 .28.22.5.5.5h8v-15zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2z">
+                    </path>
+                </svg>
+                <p>Templates</p>
             </a>
-            <a class="nav-link" id="v-tabs-profile-tab" data-mdb-toggle="tab" href="#v-tabs-profile"
-                role="tab" aria-controls="v-tabs-profile" aria-selected="false">
-                <img class="mb-1" src="images/shapes.png" alt="" height="50" width="50">
-                Elements</a>
-            <a class="nav-link" id="v-tabs-messages-tab" data-mdb-toggle="tab" href="#v-tabs-messages"
-                role="tab" aria-controls="v-tabs-messages" aria-selected="false">Emojis</a>
+
+            <!-- Elements Tab -->
+            <a class="nav-link" id="v-tabs-elements-tab" data-mdb-toggle="tab" href="#v-tabs-elements" role="tab"
+                aria-controls="v-tabs-elements" aria-selected="false">
+                <!-- <img class="mb-1" src="images/shapes.png" alt="" height="50" width="50"> -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"
+                        d="m6.5 4.25.75-.75a2.121 2.121 0 0 1 3 3L6.5 10.25 2.75 6.5a2.121 2.121 0 0 1 3-3l.75.75zm7 6 4-7.5 4 7.5h-8zm-10.75 3.5h7.5v7.5h-7.5v-7.5zm14.75-.25a4 4 0 1 0 0 8 4 4 0 0 0 0-8z">
+                    </path>
+                </svg>
+                <p>Elements</p>
+            </a>
+            <a class="nav-link" id="v-tabs-uploads-tab" data-mdb-toggle="tab" href="#v-tabs-uploads" role="tab"
+                aria-controls="v-tabs-uploads" aria-selected="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M12.75 13.81v7.44a.75.75 0 1 1-1.5 0v-7.4L9.49 15.6a.75.75 0 1 1-1.06-1.06l2.35-2.36c.68-.68 1.8-.68 2.48 0l2.35 2.36a.75.75 0 1 1-1.06 1.06l-1.8-1.8zM9 18v1.5H6.75v-.01A5.63 5.63 0 0 1 5.01 8.66a6 6 0 0 1 11.94-.4 5.63 5.63 0 0 1 .3 11.23v.01H15V18h1.88a4.12 4.12 0 1 0-1.5-7.97A4.51 4.51 0 0 0 11 4.5a4.5 4.5 0 0 0-4.43 5.29 4.13 4.13 0 0 0 .68 8.2V18H9z">
+                    </path>
+                </svg>
+                <p>Uploads</p>
+            </a>
+            <a class="nav-link" id="v-tabs-text-tab" data-mdb-toggle="tab" href="#v-tabs-text" role="tab"
+                aria-controls="v-tabs-text" aria-selected="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" fill-rule="evenodd"
+                        d="M18 5.5h-5.25V18c0 .28.22.5.5.5h2a.75.75 0 1 1 0 1.5h-6.5a.75.75 0 1 1 0-1.5h2a.5.5 0 0 0 .5-.5V5.5H6a.5.5 0 0 0-.5.5v1.25a.75.75 0 0 1-1.5 0V5.5C4 4.67 4.67 4 5.5 4h13c.83 0 1.5.67 1.5 1.5v1.75a.75.75 0 1 1-1.5 0V6a.5.5 0 0 0-.5-.5z">
+                    </path>
+                </svg>
+                <p>Text</p>
+            </a>
+            <a class="nav-link" id="v-tabs-photos-tab" data-mdb-toggle="tab" href="#v-tabs-photos" role="tab"
+                aria-controls="v-tabs-photos" aria-selected="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 1.5a.5.5 0 0 0-.5.5v14c0 .28.22.5.5.5h14a.5.5 0 0 0 .5-.5V5a.5.5 0 0 0-.5-.5H5zm5.75 10.1 3.05-4.15a2 2 0 0 1 3.22-.01L21 15.78V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-.09l3.82-5.25a2 2 0 0 1 3.22 0l.7.95zm3.6 4.9H19a.5.5 0 0 0 .5-.5v-2.72l-3.69-4.94a.5.5 0 0 0-.8 0l-3.33 4.53 2.68 3.63zm-5.51-4.96a.5.5 0 0 0-.81 0l-3.44 4.74a.5.5 0 0 0 .41.22h7.5l-3.66-4.96zM8.5 10a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z">
+                    </path>
+                </svg>
+                <p>Photos</p>
+            </a>
+            <a class="nav-link" id="v-tabs-pixabay-tab" data-mdb-toggle="tab" href="#v-tabs-pixabay" role="tab"
+                aria-controls="v-tabs-pixabay" aria-selected="false">
+                <svg height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor"
+                        d="m2.507 15.86v5.116c-.818.038-1.636.029-2.454-.019-.019-.25-.048-.461-.048-.662 0-3.6-.01-7.19 0-10.79.01-2.899 1.723-5.337 4.322-6.192 3.86-1.277 7.758 1.507 8.114 5.414.27 2.937-1.28 5.548-3.86 6.652-.828.355-1.694.47-2.58.47-1.136.011-2.253.011-3.494.011zm.009-2.582c1.261 0 2.435-.019 3.609 0 2.089.038 3.581-1.517 3.84-3.36.289-2.112-1.194-4.051-3.301-4.348h-.01c-1.962-.26-3.945 1.257-4.109 3.282-.125 1.44-.029 2.88-.029 4.426z">
+                    </path>
+                    <path fill="currentColor"
+                        d="m19.332 9.217 4.668 6.547h-3.022l-3.465-4.732c-1.261 1.565-2.31 3.187-3.504 4.732h-3.013l4.659-6.547-4.148-6.201h3.022l2.965 4.416 2.965-4.416h3.013z">
+                    </path>
+                </svg>
+                <p>Pixabay</p>
+            </a>
         </div>
         <!-- Tab navs -->
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-9 border">
         <!-- Tab content -->
         <div class="tab-content" id="v-tabs-tabContent">
-            <div class="tab-pane fade show active" id="v-tabs-home" role="tabpanel"
-                aria-labelledby="v-tabs-home-tab">
-                Home content
-            </div>
-            <div class="tab-pane fade" id="v-tabs-profile" role="tabpanel"
+            <div class="tab-pane fade show active custom-scrollbar" id="v-tabs-templates" role="tabpanel"
                 aria-labelledby="v-tabs-profile-tab">
-                Profile content
+                <%- include('./TemplateContent.ejs') %>
             </div>
-            <div class="tab-pane fade" id="v-tabs-messages" role="tabpanel"
-                aria-labelledby="v-tabs-messages-tab">
-                Messages content
+            <div class="tab-pane fade custom-scrollbar" id="v-tabs-elements" role="tabpanel" aria-labelledby="v-tabs-elements-tab">
+                <%- include('./ElementsContent.ejs') %>
             </div>
+            <div class="tab-pane fade custom-scrollbar" id="v-tabs-uploads" role="tabpanel" aria-labelledby="v-tabs-uploads-tab">
+                Uploads content
+            </div>
+            <div class="tab-pane fade custom-scrollbar" id="v-tabs-text" role="tabpanel" aria-labelledby="v-tabs-text-tab">
+                Text content
+            </div>
+            <div class="tab-pane fade custom-scrollbar" id="v-tabs-photos" role="tabpanel" aria-labelledby="v-tabs-photos-tab">
+                Photos
+            </div>
+            <div class="tab-pane fade custom-scrollbar" id="v-tabs-pixabay" role="tabpanel" aria-labelledby="v-tabs-pixabay-tab">
+                <%- include('./PixabayContent.ejs') %>
+            </div>
+
         </div>
         <!-- Tab content -->
     </div>
