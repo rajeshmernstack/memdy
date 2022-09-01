@@ -1,6 +1,6 @@
 $(document).ready(() => {
     var MemeCanvas = new fabric.Canvas('MemeCanvas', {
-        width: 1000,
+        width: 700,
         height: 700,
         backgroundColor: "white"
     });
@@ -15,15 +15,14 @@ $(document).ready(() => {
         let fieldValue = $('#pixabay-search-field').val();
         let URL = "https://pixabay.com/api/?key=" + pixabayApiKey + "&q=" + encodeURIComponent(fieldValue);
         $.get(URL, function (data, status) {
-            $
             if (status === "success") {
                 let images = "";
-                console.log(data)
                 data.hits.map((item, index) => {
                     images += `<img src='${item.previewURL}' class='border net-image' data-originalurl='${item.largeImageURL}' alt='${item.tags}'>`;
                 })
                 $('#pixabay-image-container').html(images);
             }
+            $('')
         });
     });
     $('#pixabay-search-btn').click();
@@ -157,10 +156,10 @@ $(document).ready(() => {
         }
     });
 
-    $(document).on("click", ".net-image" , function(e) {
+    $(document).on("click", ".net-image", function (e) {
         let imageSrc = $(this).data('originalurl');
         fabric.Image.fromURL(imageSrc, function (oImg) {
-            
+
             oImg.set({
                 left: 100,
                 top: 100
@@ -169,6 +168,40 @@ $(document).ready(() => {
             MemeCanvas.add(oImg).setActiveObject(oImg).renderAll();;
         });
     });
+    MemeCanvas.on('object:moving', function (e) {
+        var obj = e.target;
+        // if object is too big ignore
+        if (obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width) {
+            return;
+        }
+        obj.setCoords();
+        // top-left  corner
+        if (obj.getBoundingRect().top < 0 || obj.getBoundingRect().left < 0) {
+            obj.top = Math.max(obj.top, obj.top - obj.getBoundingRect().top);
+            obj.left = Math.max(obj.left, obj.left - obj.getBoundingRect().left);
+        }
+        // bot-right corner
+        if (obj.getBoundingRect().top + obj.getBoundingRect().height > obj.canvas.height || obj.getBoundingRect().left + obj.getBoundingRect().width > obj.canvas.width) {
+            obj.top = Math.min(obj.top, obj.canvas.height - obj.getBoundingRect().height + obj.top - obj.getBoundingRect().top);
+            obj.left = Math.min(obj.left, obj.canvas.width - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
+        }
+    });
+    MemeCanvas.on('object:selected', function(e){
+        console.log(e)
+    })
+    MemeCanvas.on('selection:updated', function (e) {
+        console.log(e)
+        //...
+     });
+     
+     MemeCanvas.on('selection:created', function (e) {
+        console.log(e)
+        //...
+     });
+     MemeCanvas.on('selection:cleared', function (e) {
+        console.log(e)
+        //...
+     });
 
 
 
