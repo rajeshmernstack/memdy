@@ -1,12 +1,13 @@
 $(document).ready(() => {
     var MemeCanvas = new fabric.Canvas('MemeCanvas', {
-        width: 700,
+        width: 500,
         height: 700,
         backgroundColor: "white"
     });
-    var selectedObject = null;
 
     console.log(MemeCanvas)
+
+
 
 
     var pixabayApiKey = '29631978-3c4be564185a97a0cedae0ebb';
@@ -27,35 +28,37 @@ $(document).ready(() => {
         });
     });
     $('#pixabay-search-btn').click();
+
     function loadAllEmojis() {
         $.get('https://api.github.com/emojis', (data, status) => {
-            if(status === "success") {
+            if (status === "success") {
                 let images = "";
-                for(const key in data) {
+                for (const key in data) {
                     images += `<img src='${data[key]}' class="border net-image" data-originalurl='${data[key]}' alt='${key}' />`
                 }
                 $('#emojis-container').html(images);
             }
         })
-        // $.ajax({
-        //     url: 'https://emojiapi.dev/api/v1/emoji_names.json',
-        //     headers: {
-        //         'Access-Control-Allow-Headers': '*',    
-        //         'Access-Control-Allow-Origin': '*',
-        //         'Content-Type':'application/json'
-
-        //     },
-        //     success: function(result){
-        //         console.log(result);
-        //     }
-        // })
-        // $.get('https://emojiapi.dev/api/v1/emoji_names.json', (data) => {
-        //     console.log(data);
-        // })
-        // emojis-container
     }
 
     loadAllEmojis();
+
+    function loadMemeTemplates() {
+        $.get('https://api.imgflip.com/get_memes', (data, status) => {
+            if (data.success) {
+                let images = "";
+                console.log(data);
+                data.data.memes.map((item, index) => {
+                    images += `<img class="border net-image" src='${item.url}' data-originalurl='${item.url}' alt='${item.name}' />`;
+                });
+                $('#templates-image-container').html(images);
+
+            }
+        })
+
+    }
+    loadMemeTemplates()
+
 
 
 
@@ -220,27 +223,27 @@ $(document).ready(() => {
             obj.left = Math.min(obj.left, obj.canvas.width - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
         }
     });
-    MemeCanvas.on('object:selected', function(e){
-        
+    MemeCanvas.on('object:selected', function (e) {
+
     })
-    MemeCanvas.on('object:added', function(e){
+    MemeCanvas.on('object:added', function (e) {
         selectedObject = e.target;
     })
     MemeCanvas.on('selection:updated', function (e) {
         console.log(e)
         //...
-     });
-     
-     MemeCanvas.on('selection:created', function (e) {
+    });
+
+    MemeCanvas.on('selection:created', function (e) {
         selectedObject = e.selected[0];
         //...
-     });
-     MemeCanvas.on('selection:cleared', function (e) {
+    });
+    MemeCanvas.on('selection:cleared', function (e) {
         selectedObject = null;
         //...
-     });
+    });
 
-     $('#meme-export-btn').click(function () {
+    $('#meme-export-btn').click(function () {
         $(this).attr('href', MemeCanvas.toDataURL({ format: "png", quality: '1' }));
         $(this).attr('download', "meme.png");
     });
@@ -262,10 +265,20 @@ $(document).ready(() => {
     $('#delete-object-btn').click(() => {
         MemeCanvas.getActiveObjects().forEach((obj) => {
             MemeCanvas.remove(obj)
-          });
-          MemeCanvas.discardActiveObject().renderAll()
+        });
+        MemeCanvas.discardActiveObject().renderAll()
     })
-
+    $('#send-to-back-btn').click(() => {
+        let selectedObject = MemeCanvas.getActiveObject();
+        MemeCanvas.sendToBack(selectedObject)
+        MemeCanvas.discardActiveObject().renderAll()
+    })
+    $('#bring-to-front-btn').click(() => {
+        
+        let selectedObject = MemeCanvas.getActiveObject();
+        MemeCanvas.bringToFront(selectedObject)
+        MemeCanvas.discardActiveObject().renderAll()
+    })
 
 
 
