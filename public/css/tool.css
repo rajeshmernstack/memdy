@@ -57,3 +57,6 @@ div.custom-scrollbar {
     scrollbar-color: #6969dd #f70202;
     scrollbar-width: thin;
 }
+.card-body {
+    padding: 1.0rem !important;
+}

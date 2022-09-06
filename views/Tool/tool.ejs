@@ -37,14 +37,16 @@
         <div class="container-fluid mt-1">
             <div class="row">
                 <%- include('./partials/sidebar.ejs') %>
-                <div class="col-md-6" style="background-color: #EAECF0;">
-                    <canvas id="MemeCanvas"></canvas>
-                </div>
-                <div class="col-md-2" style="background-color: red;">
-                    <!-- <canvas id="MemeCanvas"></canvas> -->
-                </div>
+                    <div class="col-md-6" style="background-color: #EAECF0;">
+                        <canvas id="MemeCanvas"></canvas>
+                    </div>
+                    <div class="col-md-2">
+                        <%- include('./partials/RightSidebar.ejs') %>
+                    </div>
             </div>
         </div>
+
+        
 
         <!-- MDB -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"

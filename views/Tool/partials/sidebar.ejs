@@ -55,9 +55,12 @@
             <a class="nav-link" id="v-tabs-filters-tab" data-mdb-toggle="tab" href="#v-tabs-filters" role="tab"
                 aria-controls="v-tabs-filters" aria-selected="false">
                 <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205.218 205.218">
-                    <path fill="currentColor" fill-rule="evenodd" d="M102.609,107.101l102.609-49.682L102.899,7.877l-0.29-0.14L0,57.419l102.319,49.542 L102.609,107.101z M102.609,14.323l89.024,43.097l-89.024,43.104l-89.02-43.104L102.609,14.323z" />
-                    <polygon fill="currentColor" fill-rule="evenodd" points="158.654,131.834 191.633,147.803 102.609,190.899 13.596,147.803 46.622,131.813 42.878,127.046 0,147.803 102.316,197.341 102.609,197.481 205.218,147.803 162.408,127.067" />
-                    <polygon fill="currentColor" fill-rule="evenodd" points="158.654,87.31 191.633,103.275 102.609,146.361 13.596,103.275 46.622,87.288 42.878,82.514 0,103.275 102.316,152.81 102.609,152.949 205.218,103.275 162.408,82.535" />
+                    <path fill="currentColor" fill-rule="evenodd"
+                        d="M102.609,107.101l102.609-49.682L102.899,7.877l-0.29-0.14L0,57.419l102.319,49.542 L102.609,107.101z M102.609,14.323l89.024,43.097l-89.024,43.104l-89.02-43.104L102.609,14.323z" />
+                    <polygon fill="currentColor" fill-rule="evenodd"
+                        points="158.654,131.834 191.633,147.803 102.609,190.899 13.596,147.803 46.622,131.813 42.878,127.046 0,147.803 102.316,197.341 102.609,197.481 205.218,147.803 162.408,127.067" />
+                    <polygon fill="currentColor" fill-rule="evenodd"
+                        points="158.654,87.31 191.633,103.275 102.609,146.361 13.596,103.275 46.622,87.288 42.878,82.514 0,103.275 102.316,152.81 102.609,152.949 205.218,103.275 162.408,82.535" />
                 </svg>
                 <p>Filters</p>
             </a>
@@ -72,6 +75,19 @@
                     </path>
                 </svg>
                 <p>Pixabay</p>
+            </a>
+            <a class="nav-link" id="v-tabs-emojis-tab" data-mdb-toggle="tab" href="#v-tabs-emojis" role="tab"
+                aria-controls="v-tabs-emojis" aria-selected="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor"
+                        d='M12,1.73A10.27,10.27,0,1,0,22.24,12,10.25,10.25,0,0,0,12,1.73ZM21,12a9,9,0,1,1-9-9A9,9,0,0,1,21,12Z' />
+                    <path fill="currentColor" d='M8.8,11.05a1.55,1.55,0,1,0-1.51-1.5A1.56,1.56,0,0,0,8.8,11.05Z' />
+                    <path fill="currentColor"
+                        d='M15.44,11.05a1.55,1.55,0,1,0,0-3.09,1.53,1.53,0,0,0-1.51,1.59A1.51,1.51,0,0,0,15.44,11.05Z' />
+                    <path fill="currentColor"
+                        d='M12.19,16.35A6.58,6.58,0,0,1,6.9,13.5a5.71,5.71,0,0,0,5.3,4,5.54,5.54,0,0,0,5.31-4A6.27,6.27,0,0,1,12.19,16.35Z' />
+                </svg>
+                <p>Emojis</p>
             </a>
         </div>
         <!-- Tab navs -->
@@ -94,7 +110,7 @@
             </div>
             <div class="tab-pane fade custom-scrollbar" id="v-tabs-typography" role="tabpanel"
                 aria-labelledby="v-tabs-typography-tab">
-                Text content
+                <%- include('./TypographyContent.ejs') %>
             </div>
             <div class="tab-pane fade custom-scrollbar" id="v-tabs-photos" role="tabpanel"
                 aria-labelledby="v-tabs-photos-tab">
@@ -107,6 +123,10 @@
             <div class="tab-pane fade custom-scrollbar" id="v-tabs-pixabay" role="tabpanel"
                 aria-labelledby="v-tabs-pixabay-tab">
                 <%- include('./PixabayContent.ejs') %>
+            </div>
+            <div class="tab-pane fade custom-scrollbar" id="v-tabs-emojis" role="tabpanel"
+                aria-labelledby="v-tabs-emojis-tab">
+                <%- include('./EmojisContent.ejs') %>
             </div>
 
         </div>

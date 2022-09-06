@@ -1,4 +1,4 @@
-<div class="vstack gap-2">
+<div class="hstack gap-2">
     <div class="input-group" id="pixabay-input-group">
         <div class="form-outline">
             <input type="search" id="pixabay-search-field" class="form-control" />
@@ -7,11 +7,10 @@
         <button id="pixabay-search-btn" type="button" class="btn btn-primary">
             <i class="fas fa-search"></i>
         </button>
-        
-        
     </div>
-    <div class="">
-        <div class="different-sizes-images-container" id="pixabay-image-container">
-        </div>
+    <div id="pixabay-loading-spinner" class='spinner-grow text-primary d-none' role='status'><span class='visually-hidden'>Loading...</span></div>
+</div>
+<div class="">
+    <div class="different-sizes-images-container" id="pixabay-image-container">
     </div>
 </div>

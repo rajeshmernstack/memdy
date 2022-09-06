@@ -4,6 +4,7 @@ $(document).ready(() => {
         height: 700,
         backgroundColor: "white"
     });
+    var selectedObject = null;
 
     console.log(MemeCanvas)
 
@@ -11,7 +12,7 @@ $(document).ready(() => {
     var pixabayApiKey = '29631978-3c4be564185a97a0cedae0ebb';
 
     $('#pixabay-search-btn').click(() => {
-        $('#pixabay-image-container').html("<div class='spinner-grow text-primary' role='status'><span class='visually-hidden'>Loading...</span></div>");
+        $('#pixabay-loading-spinner').removeClass('d-none')
         let fieldValue = $('#pixabay-search-field').val();
         let URL = "https://pixabay.com/api/?key=" + pixabayApiKey + "&q=" + encodeURIComponent(fieldValue);
         $.get(URL, function (data, status) {
@@ -22,10 +23,41 @@ $(document).ready(() => {
                 })
                 $('#pixabay-image-container').html(images);
             }
-            $('')
+            $('#pixabay-loading-spinner').addClass('d-none')
         });
     });
     $('#pixabay-search-btn').click();
+    function loadAllEmojis() {
+        $.get('https://api.github.com/emojis', (data, status) => {
+            if(status === "success") {
+                let images = "";
+                for(const key in data) {
+                    images += `<img src='${data[key]}' class="border net-image" data-originalurl='${data[key]}' alt='${key}' />`
+                }
+                $('#emojis-container').html(images);
+            }
+        })
+        // $.ajax({
+        //     url: 'https://emojiapi.dev/api/v1/emoji_names.json',
+        //     headers: {
+        //         'Access-Control-Allow-Headers': '*',    
+        //         'Access-Control-Allow-Origin': '*',
+        //         'Content-Type':'application/json'
+
+        //     },
+        //     success: function(result){
+        //         console.log(result);
+        //     }
+        // })
+        // $.get('https://emojiapi.dev/api/v1/emoji_names.json', (data) => {
+        //     console.log(data);
+        // })
+        // emojis-container
+    }
+
+    loadAllEmojis();
+
+
 
     $('#shapes-cirlce-card').click(() => {
         let myCircle = new fabric.Circle({
@@ -164,8 +196,10 @@ $(document).ready(() => {
                 left: 100,
                 top: 100
             });
-            oImg.scale(0.1);
+            oImg.scale(0.3);
             MemeCanvas.add(oImg).setActiveObject(oImg).renderAll();;
+        }, {
+            crossOrigin: "Anonymous",
         });
     });
     MemeCanvas.on('object:moving', function (e) {
@@ -187,7 +221,10 @@ $(document).ready(() => {
         }
     });
     MemeCanvas.on('object:selected', function(e){
-        console.log(e)
+        
+    })
+    MemeCanvas.on('object:added', function(e){
+        selectedObject = e.target;
     })
     MemeCanvas.on('selection:updated', function (e) {
         console.log(e)
@@ -195,13 +232,39 @@ $(document).ready(() => {
      });
      
      MemeCanvas.on('selection:created', function (e) {
-        console.log(e)
+        selectedObject = e.selected[0];
         //...
      });
      MemeCanvas.on('selection:cleared', function (e) {
-        console.log(e)
+        selectedObject = null;
         //...
      });
+
+     $('#meme-export-btn').click(function () {
+        $(this).attr('href', MemeCanvas.toDataURL({ format: "png", quality: '1' }));
+        $(this).attr('download', "meme.png");
+    });
+    // $('#export_jpeg').click(function () {
+    //     $(this).attr('href', myCanvas.toDataURL({ format: "jpeg", quality: '1' }));
+    //     $(this).attr('download', "meme.jpeg");
+    // });
+
+    $('#typography-add-text-btn').click(() => {
+        myText = new fabric.IText('Hello World', {
+            left: 100,
+            top: 100,
+            fontSize: 20,
+            fontFamily: "Arial"
+        });
+        MemeCanvas.add(myText);
+    })
+
+    $('#delete-object-btn').click(() => {
+        MemeCanvas.getActiveObjects().forEach((obj) => {
+            MemeCanvas.remove(obj)
+          });
+          MemeCanvas.discardActiveObject().renderAll()
+    })
 
 
 
