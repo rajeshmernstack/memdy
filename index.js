@@ -38,8 +38,8 @@ app.get('/reset/:uid/:resettoken', (req, res) => {
     res.render("reset-pass", {uid: req.params.uid, resettoken: req.params.resettoken});
 })
 
-app.get('/admin', (req, res) => {
-
+app.get('/user', (req, res) => {
+    res.render("user-dashboard/index");
 })
 
 
