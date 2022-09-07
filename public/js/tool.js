@@ -280,15 +280,6 @@ $(document).ready(() => {
         MemeCanvas.discardActiveObject().renderAll()
     })
 
-
-
-
-
-
-
-
-
-
     $('#typography_add_btn').click(() => {
         var itext = new fabric.IText('Hello World', {
             left: 100,
