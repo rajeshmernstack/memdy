@@ -46,7 +46,6 @@ app.get('/user', (req, res) => {
 
 
 app.get('/design', (req, res) => {
-    console.log(req.query)
     res.render("Tool/tool")
 })
 
