@@ -20,15 +20,15 @@ app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
 
 app.get('/', (req, res) => {
-    res.render("index")
+    res.render("user-dashboard/index")
 });
 
 app.get('/login', (req, res) => {
-    res.render("login")
+    res.render("user-dashboard/login")
 });
 
 app.get('/register', (req, res) => {
-    res.render("register")
+    res.render("user-dashboard/register")
 });
 
 app.get('/forgot-password', (req, res) => {
@@ -42,6 +42,9 @@ app.get('/user', (req, res) => {
     res.render("user-dashboard/index");
 })
 
+app.get('/logout', (req, res) => {
+    res.redirect('/login')
+})
 
 
 
