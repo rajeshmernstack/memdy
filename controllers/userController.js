@@ -9,7 +9,7 @@ const allUsers = async (req, res, next) => {
         if (err) {
             res.json({ status: 0, message: "Error in API request" })
         } else {
-            res.json({ status: 1,total: users.length, data: users });
+            res.json({ status: 1, total: users.length, data: users });
         }
     }).clone()
 }
@@ -111,7 +111,82 @@ const loggedInUser = (req, res, next) => {
 }
 
 
+const allFollowers = async (req, res) => {
+    await User.find({ _id: req.body.userId }, (err, user) => {
+        if (err) {
+            res.json({ status: 0, message: "Error in API request", err: err.message })
+        } else {
+            res.json({ status: 1, total: (user.followers?.length || 0), followers: user.followers });
+        }
+    }).clone()
+}
+
+const addFollower = async (req, res, next) => {
+    await User.findByIdAndUpdate(req.body.userId, { $push: { followers: req.body.follower } }).exec(function (err, result) {
+        if (err) {
+            res.json({ status: 0, message: "Error in add Follwer", err: err })
+        } else {
+            res.json({ status: 1, message: "Follower Added Successfully", data: result })
+        }
+    })
+}
+
+const removeFollower = async (req, res) => {
+    await User.findByIdAndUpdate(req.body.userId, { $pull: { followers: { _id: req.body.followId } } }).exec(function (err, result) {
+        if (err) {
+            res.json({ status: 0, message: "Error in Removing Follower", err: err })
+        } else {
+            res.json({ status: 1, message: "Follower removed Successfully", data: result })
+        }
+    })
+}
+
+
+const allFollowings = async (req, res) => {
+    await User.find({ _id: req.body.userId }, (err, user) => {
+        if (err) {
+            res.json({ status: 0, message: "Error in API request" })
+        } else {
+            res.json({ status: 1, total: (user.followings?.length || 0), followings: user.followings });
+        }
+    }).clone()
+}
+const addFollowing = async (req, res, next) => {
+    await User.findByIdAndUpdate(req.body.userId, { $push: { followings: req.body.following } }).exec(function (err, result) {
+        if (err) {
+            res.json({ status: 0, message: "Error in add Follwer", err: err })
+        } else {
+            res.json({ status: 1, message: "Following Added Successfully", data: result })
+        }
+    })
+}
+
+const removeFollowing = async (req, res) => {
+    await User.findByIdAndUpdate(req.body.userId, { $pull: { followings: { _id: req.body.followingId } } }).exec(function (err, result) {
+        if (err) {
+            res.json({ status: 0, message: "Error in Removing Follower", err: err })
+        } else {
+            res.json({ status: 1, message: "Following removed Successfully", data: result })
+        }
+    })
+}
 
 
 
-module.exports = { addUser, allUsers, deleteUser, loginUser, resetPassword, loggedInUser, sendPsswordResetEmail }
+
+
+module.exports = {
+    addUser,
+    allUsers,
+    deleteUser,
+    loginUser,
+    resetPassword,
+    loggedInUser,
+    sendPsswordResetEmail,
+    allFollowers,
+    addFollower,
+    removeFollower,
+    allFollowings,
+    addFollowing,
+    removeFollowing
+}

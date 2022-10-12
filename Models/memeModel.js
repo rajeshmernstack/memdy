@@ -9,6 +9,7 @@ main().catch(err => console.log(err));
 
 
 const MemeSchema = new mongoose.Schema({
+    userId: String,
     path: String,
     likes: [{
         userId: String,

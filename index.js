@@ -9,6 +9,7 @@ const userRouter = require('./routes/userRoutes');
 const adminRouter = require('./routes/adminRouter');
 const payGatewayRouter = require('./routes/payGatewayRouter')
 const memeRouter = require('./routes/memeRoutes');
+const statisticsRouter = require('./routes/statisticsRouter');
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json());
@@ -22,6 +23,7 @@ app.use('/api/users', userRouter);
 app.use('/api/memes', memeRouter)
 app.use('/api/admin', adminRouter);
 app.use('/api/admin/paygateway', payGatewayRouter)
+app.use('/api/statistics', statisticsRouter);
 
 
 app.get('/', (req, res) => {
