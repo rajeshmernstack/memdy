@@ -5,12 +5,12 @@ const { checkUserAuth } = require('../middlewares/auth_middleware');
 
 
 //Routes which require authentication
-userRouter.use("/all", checkUserAuth);
+// userRouter.use("/all", checkUserAuth);
 userRouter.use('/authorized', checkUserAuth);
 
 
 //Public Routes
-userRouter.post('/add', userController.addUser);
+userRouter.post('/register', userController.addUser);
 userRouter.get('/all', userController.allUsers);
 userRouter.get('/delete/:userid', userController.deleteUser)
 userRouter.post('/login', userController.loginUser)

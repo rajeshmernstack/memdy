@@ -8,6 +8,7 @@ const cors = require('cors');
 const userRouter = require('./routes/userRoutes');
 const adminRouter = require('./routes/adminRouter');
 const payGatewayRouter = require('./routes/payGatewayRouter')
+const memeRouter = require('./routes/memeRoutes');
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json());
@@ -17,9 +18,11 @@ app.use(express.json())
 dotenv.config()
 
 
-app.use('/api/user', userRouter);
+app.use('/api/users', userRouter);
+app.use('/api/memes', memeRouter)
 app.use('/api/admin', adminRouter);
 app.use('/api/admin/paygateway', payGatewayRouter)
+
 
 app.get('/', (req, res) => {
     res.render("user-dashboard/index")

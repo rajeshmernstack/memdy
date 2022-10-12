@@ -9,7 +9,7 @@ const allUsers = async (req, res, next) => {
         if (err) {
             res.json({ status: 0, message: "Error in API request" })
         } else {
-            res.json({ status: 1, data: users });
+            res.json({ status: 1,total: users.length, data: users });
         }
     }).clone()
 }

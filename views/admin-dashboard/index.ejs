@@ -41,6 +41,7 @@
 
     <link rel="stylesheet" href="admin-assets/css/style1.css" />
     <link rel="stylesheet" href="admin-assets/css/colors/default.css" id="colorSkinCSS">
+    
 </head>
 
 <body class="crm_body_bg">
@@ -59,24 +60,21 @@
                                     <div class="col-12">
                                         <div class="quick_activity_wrap">
                                             <div class="single_quick_activity">
-                                                <h4>Total Income</h4>
-                                                <h3>$ <span class="counter">5,79,000</span> </h3>
-                                                <p>Saved 25%</p>
+                                                <h4>Total Users</h4>
+                                                <h3 id="total_users_counter">0</h3>
+                                            </div>  
+                                            <div class="single_quick_activity">
+                                                <h4>Total Memes</h4>
+                                                <h3 id="total_memes_counter">0</h3>
                                             </div>
                                             <div class="single_quick_activity">
-                                                <h4>Total Expences</h4>
-                                                <h3>$ <span class="counter">79,000</span> </h3>
-                                                <p>Saved 25%</p>
+                                                <h4>Total Payment Gateways</h4>
+                                                <h3 id="total_paymentgayway_counter">0</h3>
                                             </div>
+                                            
                                             <div class="single_quick_activity">
-                                                <h4>Cash on Hand</h4>
-                                                <h3>$ <span class="counter">92,000</span> </h3>
-                                                <p>Saved 25%</p>
-                                            </div>
-                                            <div class="single_quick_activity">
-                                                <h4>Net Profit Margin</h4>
-                                                <h3>$ <span class="counter">1,79,000</span> </h3>
-                                                <p>Saved 65%</p>
+                                                <h4>Total Revenue</h4>
+                                                <h3 id="total_revenue">0</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -145,6 +143,13 @@
 
     <script>
 
+        $(document).ready(() => {
+            $.get('<%= process.env.APP_URL %>'+"/api/users/all", (data, status) => {
+                if(status === "success") {
+                    $('#total_users_counter').text(data.total)
+                }
+            })
+        })
 
     </script>
 </body>

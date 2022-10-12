@@ -10,13 +10,16 @@ main().catch(err => console.log(err));
 
 const MemeSchema = new mongoose.Schema({
     path: String,
-    Likes: Number,
-    Comments: [{
+    likes: [{
+        userId: String,
+        time:{type: Date, default: Date.now}
+    }],
+    comments: [{
         userId: String,
         comment: String,
         time:{type: Date, default: Date.now}
     }],
-    Shares: [{
+    shares: [{
         userId: String,
         time:{type: Date, default: Date.now}
     }],
