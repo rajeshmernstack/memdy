@@ -7,6 +7,7 @@ const dotenv = require('dotenv')
 const cors = require('cors');
 const userRouter = require('./routes/userRoutes');
 const adminRouter = require('./routes/adminRouter');
+const payGatewayRouter = require('./routes/payGatewayRouter')
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json());
@@ -18,6 +19,7 @@ dotenv.config()
 
 app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/admin/paygateway', payGatewayRouter)
 
 app.get('/', (req, res) => {
     res.render("user-dashboard/index")
@@ -40,6 +42,9 @@ app.get('/reset/:uid/:resettoken', (req, res) => {
 
 app.get('/user', (req, res) => {
     res.render("user-dashboard/index");
+})
+app.get('/admin', (req, res) => {
+    res.render("admin-dashboard/index");
 })
 
 app.get('/logout', (req, res) => {
