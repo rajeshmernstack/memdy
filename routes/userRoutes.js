@@ -8,10 +8,10 @@ const { checkUserAuth } = require('../middlewares/auth_middleware');
 // userRouter.use("/all", checkUserAuth);
 userRouter.use('/authorized', checkUserAuth);
 
-
 //Public Routes
 userRouter.post('/register', userController.addUser);
 userRouter.get('/all', userController.allUsers);
+userRouter.get('/random/:total', userController.randomUsers);
 userRouter.get('/delete/:userid', userController.deleteUser)
 userRouter.post('/login', userController.loginUser)
 userRouter.get('/authorized', userController.loggedInUser)

@@ -74,7 +74,19 @@
                                             
                                             <div class="single_quick_activity">
                                                 <h4>Total Revenue</h4>
-                                                <h3 id="total_revenue">0</h3>
+                                                <h3 id="total_revenue_counter">0</h3>
+                                            </div>
+                                            <div class="single_quick_activity">
+                                                <h4>Total Likes</h4>
+                                                <h3 id="total_likes_counter">0</h3>
+                                            </div>
+                                            <div class="single_quick_activity">
+                                                <h4>Total Comments</h4>
+                                                <h3 id="total_comments_counter">0</h3>
+                                            </div>
+                                            <div class="single_quick_activity">
+                                                <h4>Total Shares</h4>
+                                                <h3 id="total_shares_counter">0</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +103,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <div class="footer_iner text-center">
-                            <p>2022 © Influence - Designed by<a href="#"> Dashboard</a></p>
+                            <p>2022 © MemDy - All Rights Reserved by<a href="/"> MeemDy</a></p>
                         </div>
                     </div>
                 </div>
@@ -144,9 +156,34 @@
     <script>
 
         $(document).ready(() => {
-            $.get('<%= process.env.APP_URL %>'+"/api/users/all", (data, status) => {
+            $.get('<%= process.env.APP_URL %>'+"/api/statistics/users/total", (data, status) => {
                 if(status === "success") {
                     $('#total_users_counter').text(data.total)
+                }
+            })
+            $.get('<%= process.env.APP_URL %>'+"/api/statistics/memes/total", (data, status) => {
+                if(status === "success") {
+                    $('#total_memes_counter').text(data.total)
+                }
+            })
+            $.get('<%= process.env.APP_URL %>'+"/api/statistics/paygateways/total", (data, status) => {
+                if(status === "success") {
+                    $('#total_paymentgayway_counter').text(data.total)
+                }
+            })
+            $.get('<%= process.env.APP_URL %>'+"/api/statistics/likes/total", (data, status) => {
+                if(status === "success") {
+                    $('#total_likes_counter').text(data.total)
+                }
+            })
+            $.get('<%= process.env.APP_URL %>'+"/api/statistics/comments/total", (data, status) => {
+                if(status === "success") {
+                    $('#total_comments_counter').text(data.total)
+                }
+            })
+            $.get('<%= process.env.APP_URL %>'+"/api/statistics/shares/total", (data, status) => {
+                if(status === "success") {
+                    $('#total_shares_counter').text(data.total)
                 }
             })
         })

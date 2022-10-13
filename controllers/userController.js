@@ -2,7 +2,7 @@ const User = require('../Models/userModel')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-
+require('mongoose-query-random');
 
 const allUsers = async (req, res, next) => {
     await User.find({}, (err, users) => {
@@ -19,6 +19,7 @@ const addUser = async (req, res, next) => {
         const salt = await bcrypt.genSalt(10)
         const hashPassword = await bcrypt.hash(req.body.new_password, salt);
         const newUser = new User({
+            fullname: req.body.new_fullname,
             username: req.body.new_username,
             email: req.body.new_email,
             password: hashPassword
@@ -27,8 +28,8 @@ const addUser = async (req, res, next) => {
             if (err) {
                 res.json({ status: 0, message: `${Object.keys(err.keyValue)[0]} already exists` })
             } else {
-                const jwtToken = jwt.sign({ userID: result._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
-                res.status(201).json({ status: 1, message: "user registered successfully", data: result, token: jwtToken })
+                
+                res.status(201).json({ status: 1, message: "user registered successfully", data: result })
             }
         })
     }
@@ -60,7 +61,7 @@ const loginUser = async (req, res, next) => {
                 res.json({ status: 1, message: "User Authendicated Successfully", token: jwtToken })
             }
         } else {
-            res.status(401).json({ status: 0, message: "Username or Password is Incorrect" })
+            res.json({ status: 0, message: "Username or Password is Incorrect" })
         }
     }
 }
@@ -106,8 +107,8 @@ const sendPsswordResetEmail = async (req, res, next) => {
 
 
 const loggedInUser = (req, res, next) => {
-    res.send({ status: 1, message: "User is Logged In", data: req.user })
     console.log(req.user)
+    res.send({ status: 1, message: "User is Logged In", data: req.user })
 }
 
 
@@ -171,6 +172,13 @@ const removeFollowing = async (req, res) => {
     })
 }
 
+const randomUsers = async (req, res) => {
+    await User.find().random(req.params.total, true, function(err, users) {
+        if (err) throw err;
+        res.json({status: 1, data: users})
+     }).clone();
+}
+
 
 
 
@@ -188,5 +196,6 @@ module.exports = {
     removeFollower,
     allFollowings,
     addFollowing,
-    removeFollowing
+    removeFollowing,
+    randomUsers
 }

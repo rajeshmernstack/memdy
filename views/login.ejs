@@ -54,16 +54,17 @@
                                         <h4 class="mt-1 mb-5 pb-1">We are The MemDy Team</h4>
                                     </div>
 
-                                    <form action="api/user/login" method="POST">
+                                    <form action="api/users/login" method="POST" id="user_login_form">
                                         <p>Please login to your account</p>
 
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="username" name="my_username" class="form-control"/>
+                                            <input type="text" id="username" name="my_username" class="form-control" />
                                             <label class="form-label" for="username">Username</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="password" name="my_password" class="form-control" />
+                                            <input type="password" id="password" name="my_password"
+                                                class="form-control" />
                                             <label class="form-label" for="password">Password</label>
                                         </div>
 
@@ -76,7 +77,8 @@
 
                                         <div class="d-flex align-items-center justify-content-center pb-4">
                                             <p class="mb-0 me-2">Don't have an account?</p>
-                                            <a type="button" href="/register" class="btn btn-outline-danger">Register Here</a>
+                                            <a type="button" href="/register" class="btn btn-outline-danger">Register
+                                                Here</a>
                                         </div>
 
                                     </form>
@@ -106,6 +108,36 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('submit', '#user_login_form', (event) => {
+                event.preventDefault();
+                $.post("<%= process.env.APP_URL %>" + "/api/users/login", $('#user_login_form').serializeArray(), (data, status) => {
+                    if (status === "success") {
+                        if (data.status === 0) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: data.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        } else {
+                            localStorage.setItem('token', data.token);
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Logged in Successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            window.location = "/user"
+                        }
+                    }
+                })
+            })
+        });
+    </script>
 </body>
 
 </html>

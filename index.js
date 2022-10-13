@@ -31,11 +31,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render("user-dashboard/login")
+    res.render("login")
 });
 
 app.get('/register', (req, res) => {
-    res.render("user-dashboard/register")
+    res.render("register")
 });
 
 app.get('/forgot-password', (req, res) => {
@@ -50,6 +50,9 @@ app.get('/user', (req, res) => {
 })
 app.get('/admin', (req, res) => {
     res.render("admin-dashboard/index");
+})
+app.get('/admin/users', (req, res) => {
+    res.render("admin-dashboard/users");
 })
 
 app.get('/logout', (req, res) => {
