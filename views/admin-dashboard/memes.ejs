@@ -59,19 +59,9 @@
                     </div>
 
                     <div class="row" id="memes_row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header text-center">
-                                    <h5>Meme Creator Name</h5>
-                                </div>
-                                <div class="card-body">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="card-footer text-center">
-                                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -126,7 +116,7 @@
         <script>
 
             $(document).ready(function () {
-                
+
 
                 $.get('<%= process.env.APP_URL %>' + "/api/memes/all", (data, status) => {
                     if (status === "success") {
@@ -141,7 +131,7 @@
                                 <div class="card-body">
                                     <img src="/${meme.path}" height="300" width="350" alt="">
                                 </div>
-                                <div class="card-footer text-center bg-white">
+                                <div class="card-footer text-center bg-whites">
                                     <button class="btn btn-danger" onclick="deleteMeme('${meme._id}')"><i class="fa-solid fa-trash"></i> Delete</button>
                                 </div>
                             </div>
@@ -152,7 +142,20 @@
                     }
                 });
             });
-
+            function deleteMeme(memeid) {
+                $.get("<%= process.env.APP_URL %>" + "/api/memes/delete/" + memeid, (data, status) => {
+                    if (status === "success") {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        location.reload();
+                    }
+                })
+            }
         </script>
 </body>
 
