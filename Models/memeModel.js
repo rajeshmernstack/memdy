@@ -4,7 +4,6 @@ async function main() {
     await mongoose.connect("mongodb+srv://memdy:memdymemdy@memdy.8dgvrzg.mongodb.net/memdy");
 }
 
-
 main().catch(err => console.log(err));
 
 
