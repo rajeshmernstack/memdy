@@ -26,10 +26,10 @@
     <link rel="stylesheet" href="user-assets/css/tailwind.css">
     <script>
         var userLoggedIn = false;
+        var userLoggedInData = {};
         if (localStorage.getItem('token') === null) {
             userLoggedIn = false;
         } else {
-            console.log("User is logge in ")
             userLoggedIn = true;
         }
     </script>
@@ -1173,62 +1173,9 @@
                                         <div
                                             class="bg-gray-50 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:bg-gray-800 dark:border-gray-700">
                                             <h2 class="font-semibold text-lg">Latest</h2>
-                                            <a href="explore.html"> See all</a>
                                         </div>
 
-                                        <div class="grid grid-cols-2 gap-2 p-3 uk-link-reset">
-
-                                            <div
-                                                class="bg-red-500 max-w-full h-32 rounded-lg relative overflow-hidden uk-transition-toggle">
-                                                <!-- <a href="#" uk-toggle> -->
-                                                <img src="images/memes/meme1.jpg"
-                                                    class="w-full h-full absolute object-cover inset-0">
-                                                <!-- </a> -->
-                                                <div
-                                                    class="flex flex-1 justify-around items-center absolute bottom-0 w-full p-2 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                                                    <a href="#"> <i class="uil-heart"></i> 150 </a>
-                                                    <a href="#"> <i class="uil-heart"></i> 30 </a>
-                                                </div>
-                                            </div>
-
-                                            <div
-                                                class="bg-red-500 max-w-full h-40 rounded-lg relative overflow-hidden uk-transition-toggle">
-                                                <!-- <a href="#story-modal" uk-toggle> -->
-                                                <img src="images/memes/meme2.jpg"
-                                                    class="w-full h-full absolute object-cover inset-0">
-                                                <!-- </a> -->
-                                                <div
-                                                    class="flex flex-1 justify-around items-center absolute bottom-0 w-full p-2 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                                                    <a href="#"> <i class="uil-heart"></i> 150 </a>
-                                                    <a href="#"> <i class="uil-heart"></i> 30 </a>
-                                                </div>
-                                            </div>
-
-                                            <div
-                                                class="bg-red-500 max-w-full h-40 -mt-8 rounded-lg relative overflow-hidden uk-transition-toggle">
-                                                <!-- <a href="#story-modal" uk-toggle> -->
-                                                <img src="images/memes/meme3.jpg"
-                                                    class="w-full h-full absolute object-cover inset-0">
-                                                <!-- </a> -->
-                                                <div
-                                                    class="flex flex-1 justify-around  items-center absolute bottom-0 w-full p-2 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                                                    <a href="#"> <i class="uil-heart"></i> 150 </a>
-                                                    <a href="#"> <i class="uil-heart"></i> 30 </a>
-                                                </div>
-                                            </div>
-
-                                            <div
-                                                class="bg-red-500 max-w-full h-32 rounded-lg relative overflow-hidden uk-transition-toggle">
-                                                <!-- <a href="#story-modal" uk-toggle> -->
-                                                <img src="images/memes/meme4.jpg"
-                                                    class="w-full h-full absolute object-cover inset-0">
-                                                <!-- </a> -->
-                                                <div
-                                                    class="flex flex-1 justify-around  items-center absolute bottom-0 w-full p-2 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                                                    <a href="#"> <i class="uil-heart"></i> 150 </a>
-                                                    <a href="#"> <i class="uil-heart"></i> 30 </a>
-                                                </div>
-                                            </div>
+                                        <div class="grid grid-cols-2 gap-2 p-3 uk-link-reset" id="latest_memes_box">
 
                                         </div>
 
@@ -1390,20 +1337,27 @@
     <script src="user-assets/js/uikit.js"></script>
     <script src="user-assets/js/simplebar.js"></script>
     <script src="user-assets/js/custom.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
 
         $(document).ready(() => {
-            console.log(userLoggedIn)
+            if (userLoggedIn && localStorage.getItem('token') != null) {
+                let token = localStorage.getItem('token');
+                $.ajax({
+                    url: '<%= process.env.APP_URL %>' + "/api/users/authorized",
+                    type: 'GET',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+                    },
+                    success: function (result) {
+                        console.log(result)
+                        userLoggedInData = result.data;
+                    },
+                    error: function (err) { },
+                });
+            }
 
-            // $.ajax({
-            //     url: '<%= process.env.APP_URL %>'+ "/api/users/authorized",
-            //     type: 'GET',
-            //     beforeSend: function (xhr) {
-            //         xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-            //     },
-            //     success: function () { },
-            //     error: function () { },
-            // });
             function getWhoToFollowUsers() {
                 $.get('<%= process.env.APP_URL %>' + "/api/users/random/3", (data, status) => {
                     if (status === "success") {
@@ -1419,19 +1373,63 @@
                                                     <span class="block capitalize font-semibold"> ${item.username} </span>
                                                 </div>
                                             </div>
+                                            `;
+                            if (userLoggedIn) {
+                                rows += `<a onclick="followSomeone('${item._id}')" class="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> Follow </a>`
 
-                                            <a href="#" class="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> Follow </a>
-                                        </div>`
+                            }
+                            rows += '</div>';
+
+
                         })
 
                         $('#who_to_follow_list').html(rows)
                     }
                 })
             }
-            getWhoToFollowUsers()
+
+            function getLatestMemesBox() {
+                $.get('<%= process.env.APP_URL %>' + "/api/memes/all", (data, status) => {
+                    if (status === "success") {
+                        let cards = "";
+                        data.data.forEach((meme, index) => {
+
+                            cards += `<div class="bg-red-500 max-w-full h-${index % 2 === 0 ? 32 : 40} rounded-lg relative overflow-hidden uk-transition-toggle">
+                                            <!-- <a href="#" uk-toggle> -->
+                                            <img src="${meme.path}"
+                                                class="w-full h-full absolute object-cover inset-0">
+                                            <!-- </a> -->
+                                            <div
+                                                class="flex flex-1 justify-around items-center absolute bottom-0 w-full p-2 text-white custom-overly1 uk-transition-slide-bottom-medium">
+                                                <a href="#"> <i class="uil-heart"></i> 150 </a>
+                                                <a href="#"> <i class="uil-heart"></i> 30 </a>
+                                            </div>
+                                        </div>`
+                        })
+                        $('#latest_memes_box').html(cards)
+                    }
+                })
+            }
+
+            getWhoToFollowUsers();
+            getLatestMemesBox();
+
+
 
         })
-
+        function followSomeone(followingId) {
+            $.post('<%= process.env.APP_URL %>' + "/api/users/following/add", { userId: userLoggedInData._id, following: { userId: followingId } }, (data, status) => {
+                if (status === "success") {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+        }
     </script>
 </body>
 

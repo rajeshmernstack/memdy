@@ -107,7 +107,6 @@ const sendPsswordResetEmail = async (req, res, next) => {
 
 
 const loggedInUser = (req, res, next) => {
-    console.log(req.user)
     res.send({ status: 1, message: "User is Logged In", data: req.user })
 }
 
@@ -150,7 +149,7 @@ const allFollowings = async (req, res) => {
         } else {
             res.json({ status: 1, total: (user.followings?.length || 0), followings: user.followings });
         }
-    }).clone()
+    }).populate('followings.userId').clone()
 }
 const addFollowing = async (req, res, next) => {
     await User.findByIdAndUpdate(req.body.userId, { $push: { followings: req.body.following } }).exec(function (err, result) {
