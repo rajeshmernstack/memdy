@@ -16,6 +16,6 @@ const PayGatewaySchema = new mongoose.Schema({
 
 
 
-const PaymentGateway = mongoose.model("PaymentGateway", PayGatewaySchema);
+const PaymentGateway = mongoose.model("PaymentGateways", PayGatewaySchema);
 
 module.exports = PaymentGateway;

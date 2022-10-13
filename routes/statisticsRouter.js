@@ -1,7 +1,10 @@
 const express = require('express');
 const statisticsRouter = express.Router();
 const statisticsController = require('../controllers/statisticsController');
-
+statisticsRouter.get('/users/total', statisticsController.totalUsers);
 statisticsRouter.get('/likes/total', statisticsController.totalLikes);
-
+statisticsRouter.get('/comments/total', statisticsController.totalComments);
+statisticsRouter.get('/shares/total', statisticsController.totalShares);
+statisticsRouter.get('/paygateways/total', statisticsController.totalPaymentGateways);
+statisticsRouter.get('/memes/total', statisticsController.totalMemes);
 module.exports = statisticsRouter;
