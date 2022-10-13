@@ -1,6 +1,8 @@
 const express = require('express');
 const memeRouter = express.Router();
 const memeController = require('../controllers/memeController')
+memeRouter.get('/all', memeController.allMemes)
+
 memeRouter.post('/publish', memeController.publishMeme)
 memeRouter.get('/delete/:memeid', memeController.deleteMeme)
 memeRouter.post('/likes/add', memeController.addLike)

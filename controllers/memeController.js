@@ -1,5 +1,14 @@
 const Meme = require('../Models/memeModel');
 
+const allMemes = async (req, res) => {
+    await Meme.find({}, (err, memes) => {
+        if(err) {
+            res.json({status:0, message: "Error in API"})
+        }else{
+            res.json({status: 1, message: "Memes Fetched Successfully", data: memes})
+        }
+    }).populate('userId').clone()
+}
 
 const publishMeme = async (req, res) => {
     const newMeme = new Meme(req.body);
@@ -83,4 +92,4 @@ const removeShare = async (req, res) => {
     })
 }
 
-module.exports = { publishMeme, deleteMeme, addLike, removeLike, addComment, removeComment, addShare, removeShare }
+module.exports = {allMemes, publishMeme, deleteMeme, addLike, removeLike, addComment, removeComment, addShare, removeShare }

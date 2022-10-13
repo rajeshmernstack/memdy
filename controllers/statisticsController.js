@@ -71,6 +71,17 @@ const totalMemes = async (req, res) => {
         }
     }).clone();
 }
+const totalRevenue = async (req, res) => {
+    await Meme.find({}, (err, likes) => {
+        if (err) {
+            res.json({ status: 0, message: "Error Occured in API" });
+        } else {
+            let total_likes = 0;
+            likes.forEach(like => total_likes += like.likes.length);
+            res.json({status: 1, total: total_likes*process.env.PROFIT_RATE});
+        }
+    }).select("likes").clone();
+}
 
 module.exports = {
     totalLikes,
@@ -78,5 +89,6 @@ module.exports = {
     totalShares,
     totalUsers,
     totalPaymentGateways,
-    totalMemes
+    totalMemes,
+    totalRevenue
 }

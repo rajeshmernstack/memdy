@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<!-- Mirrored from demo.dashboardpack.com/finance-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Oct 2022 10:11:45 GMT -->
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Admin Dashboard</title>
+    <link rel="icon" href="/admin-assets/img/logo.png" type="image/png">
+
+    <link rel="stylesheet" href="../admin-assets/css/bootstrap1.min.css" />
+
+    <link rel="stylesheet" href="../admin-assets/vendors/swiper_slider/css/swiper.min.css" />
+
+    <link rel="stylesheet" href="../admin-assets/vendors/select2/css/select2.min.css" />
+
+    <link rel="stylesheet" href="../admin-assets/vendors/niceselect/css/nice-select.css" />
+
+    <link rel="stylesheet" href="../admin-assets/vendors/owl_carousel/css/owl.carousel.css" />
+
+    <link rel="stylesheet" href="../admin-assets/vendors/gijgo/gijgo.min.css" />
+
+    <link rel="stylesheet" href="../admin-assets/vendors/font_awesome/css/all.min.css" />
+    <link rel="stylesheet" href="../admin-assets/vendors/tagsinput/tagsinput.css" />
+
+    <link rel="stylesheet" href="../admin-assets/vendors/text_editor/summernote-bs4.css" />
+
+    <link rel="stylesheet" href="../admin-assets/vendors/morris/morris.css">
+
+    <link rel="stylesheet" href="../admin-assets/vendors/material_icon/material-icons.css" />
+
+    <link rel="stylesheet" href="../admin-assets/css/metisMenu.css">
+
+    <link rel="stylesheet" href="../admin-assets/css/style1.css" />
+    <link rel="stylesheet" href="../admin-assets/css/colors/default.css" id="colorSkinCSS">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="crm_body_bg">
+
+    <!-- Sidebar -->
+    <%- include('partials/sidebar.ejs') %>
+        <!-- END -->
+        <section class="main_content dashboard_part">
+            <div class="main_content_iner ">
+                <div class="container-fluid plr_30 body_white_bg pt_30">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="QA_section">
+                                <div class="white_box_tittle list_header">
+                                    <h4>Memes Table</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="memes_row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    <h5>Meme Creator Name</h5>
+                                </div>
+                                <div class="card-body">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="card-footer text-center">
+                                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer_part">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="footer_iner text-center">
+                                <p>2022 © MemDy - All Rights Reserved by<a href="/"> MeemDy</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- <script src="admin-assets/js/jquery1-3.4.1.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script src="../admin-assets/js/popper1.min.js"></script>
+
+        <script src="../admin-assets/js/bootstrap1.min.js"></script>
+
+        <script src="../admin-assets/js/metisMenu.js"></script>
+
+        <script src="../admin-assets/vendors/count_up/jquery.waypoints.min.js"></script>
+
+
+        <script src="../admin-assets/vendors/count_up/jquery.counterup.min.js"></script>
+
+        <script src="../admin-assets/vendors/swiper_slider/js/swiper.min.js"></script>
+
+        <script src="../admin-assets/vendors/niceselect/js/jquery.nice-select.min.js"></script>
+
+        <script src="../admin-assets/vendors/owl_carousel/js/owl.carousel.min.js"></script>
+
+        <script src="../admin-assets/vendors/gijgo/gijgo.min.js"></script>
+
+        <script src="../admin-assets/vendors/progressbar/jquery.barfiller.js"></script>
+
+        <script src="../admin-assets/vendors/tagsinput/tagsinput.js"></script>
+
+        <script src="../admin-assets/vendors/text_editor/summernote-bs4.js"></script>
+
+        <script src="../admin-assets/js/custom.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+
+            $(document).ready(function () {
+                
+
+                $.get('<%= process.env.APP_URL %>' + "/api/memes/all", (data, status) => {
+                    if (status === "success") {
+                        console.log(data);
+                        let cards = "";
+                        data.data.forEach(meme => {
+                            cards += `<div class="col-md-4 mt-1">
+                            <div class="card">
+                                <div class="card-header text-center bg-white">
+                                    <h5>${meme.userId.fullname}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <img src="/${meme.path}" height="300" width="350" alt="">
+                                </div>
+                                <div class="card-footer text-center bg-white">
+                                    <button class="btn btn-danger" onclick="deleteMeme('${meme._id}')"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>`
+                        });
+
+                        $('#memes_row').html(cards)
+                    }
+                });
+            });
+
+        </script>
+</body>
+
+</html>

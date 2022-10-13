@@ -18,7 +18,6 @@ app.use(cors())
 app.use(express.json())
 dotenv.config()
 
-
 app.use('/api/users', userRouter);
 app.use('/api/memes', memeRouter)
 app.use('/api/admin', adminRouter);
@@ -53,6 +52,9 @@ app.get('/admin', (req, res) => {
 })
 app.get('/admin/users', (req, res) => {
     res.render("admin-dashboard/users");
+})
+app.get('/admin/memes', (req, res) => {
+    res.render("admin-dashboard/memes");
 })
 
 app.get('/logout', (req, res) => {

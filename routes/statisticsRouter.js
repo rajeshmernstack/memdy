@@ -7,4 +7,5 @@ statisticsRouter.get('/comments/total', statisticsController.totalComments);
 statisticsRouter.get('/shares/total', statisticsController.totalShares);
 statisticsRouter.get('/paygateways/total', statisticsController.totalPaymentGateways);
 statisticsRouter.get('/memes/total', statisticsController.totalMemes);
+statisticsRouter.get('/revenue/total', statisticsController.totalRevenue);
 module.exports = statisticsRouter;

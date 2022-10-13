@@ -28,7 +28,7 @@ const addUser = async (req, res, next) => {
             if (err) {
                 res.json({ status: 0, message: `${Object.keys(err.keyValue)[0]} already exists` })
             } else {
-                
+
                 res.status(201).json({ status: 1, message: "user registered successfully", data: result })
             }
         })
@@ -173,10 +173,12 @@ const removeFollowing = async (req, res) => {
 }
 
 const randomUsers = async (req, res) => {
-    await User.find().random(req.params.total, true, function(err, users) {
-        if (err) throw err;
-        res.json({status: 1, data: users})
-     }).clone();
+    await User.find().random(req.params.total, true, function (err, users) {
+        if(err) {
+            res.json({status: 0, message: "Error in API"})
+        }
+        res.json({ status: 1, data: users })
+    }).clone();
 }
 
 
