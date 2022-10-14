@@ -19,28 +19,28 @@
         <div class="right-side lg:pr-4">
             <!-- upload -->
             <script>
-                if (userLoggedIn) {
+                if (userLoggedIn && localStorage.getItem('token') != null) {
                     document.write(`<a href="/design"
                         class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white"> Meme Creator Tool
                 </a>`)
                 }else{
-                    document.write(`<a href="/login"
-                        class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">Login
-                </a>`)
+                    document.write(`<a href="/login" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">Login</a>
+                    <a href="/register" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">Register</a>`)
                 }
             </script>
-
-
-            <a href="#">
-                <img src="user-assets/images/avatars/avatar-2.jpg" class="header-avatar" alt="">
-            </a>
+            <script>
+                if(userLoggedIn && localStorage.getItem('token') != null) {
+                    document.write(`<a href="#">
+                        <img src="user-assets/images/avatars/avatar-2.jpg" class="header-avatar" alt=""></a>
             <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                 <ul>
                     <li><a href="/profile"> Profile </a> </li>
-                    
                     <li><a href="/logout"> Log Out</a></li>
                 </ul>
-            </div>
+            </div>`)
+                } 
+            </script>
+            
 
         </div>
     </div>

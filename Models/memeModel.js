@@ -11,16 +11,16 @@ const MemeSchema = new mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     path: String,
     likes: [{
-        userId: String,
+        userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         time:{type: Date, default: Date.now}
     }],
     comments: [{
-        userId: String,
+        userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         comment: String,
         time:{type: Date, default: Date.now}
     }],
     shares: [{
-        userId: String,
+        userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         time:{type: Date, default: Date.now}
     }],
 });

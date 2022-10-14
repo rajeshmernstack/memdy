@@ -7,7 +7,7 @@ const allMemes = async (req, res) => {
         }else{
             res.json({status: 1, message: "Memes Fetched Successfully", data: memes})
         }
-    }).populate('userId').clone()
+    }).populate('userId').populate('likes.userId').clone()
 }
 
 const publishMeme = async (req, res) => {
@@ -41,7 +41,7 @@ const addLike = async (req, res) => {
         if (err) {
             res.json({ status: 0, message: "Error in Like", err: err })
         } else {
-            res.json({ status: 1, message: "meme Liked Successfully", data: result })
+            res.json({ status: 1, message: "MeMe Liked Successfully", data: result })
         }
     })
 }

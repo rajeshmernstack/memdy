@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const User = require('./Models/userModel');
 const dotenv = require('dotenv')
 const cors = require('cors');
+
+// const axios = require('axios').default;
 const userRouter = require('./routes/userRoutes');
 const adminRouter = require('./routes/adminRouter');
 const payGatewayRouter = require('./routes/payGatewayRouter')

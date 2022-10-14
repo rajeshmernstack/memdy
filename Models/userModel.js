@@ -13,17 +13,17 @@ const UserSchema = new mongoose.Schema({
     username: { type: String, required: [true, "Username is Required"], unique: true, trim: true },
     email: { type: String, required: [true, "Email is Required"], unique: true, trim: true },
     password: { type: String, required: [true, "Password is Required"], trim: true },
-    avatar: { type: String, default: null },
-    paymentGatewayId: {type: String, default: null},
+    avatar: { type: String, default: 'images/avatars/default.jpg' },
+    paymentGatewayName: {type: String, default: null},
     accountNumber: { type: String, default: null},
     totalBalance: { type: Number, default: 0},
     withdrawnBalance: { type: Number, default: 0},
     followers: [{
-        userId: String,
+        userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         time:{type: Date, default: Date.now}
     }],
     followings: [{
-        userId: String,
+        userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         time: {type: Date, default: Date.now}
     }]
 

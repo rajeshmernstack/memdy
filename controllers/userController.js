@@ -2,6 +2,9 @@ const User = require('../Models/userModel')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const axios = require('axios');
+
+
 require('mongoose-query-random');
 
 const allUsers = async (req, res, next) => {
@@ -11,7 +14,7 @@ const allUsers = async (req, res, next) => {
         } else {
             res.json({ status: 1, total: users.length, data: users });
         }
-    }).clone()
+    }).populate('followers.userId').populate('followings.userId').clone()
 }
 
 const addUser = async (req, res, next) => {
@@ -116,7 +119,7 @@ const allFollowers = async (req, res) => {
         if (err) {
             res.json({ status: 0, message: "Error in API request", err: err.message })
         } else {
-            res.json({ status: 1, total: (user.followers?.length || 0), followers: user.followers });
+            res.json({ status: 1, message: "Follwing Done Successfully", data: user })
         }
     }).clone()
 }
@@ -156,7 +159,19 @@ const addFollowing = async (req, res, next) => {
         if (err) {
             res.json({ status: 0, message: "Error in add Follwer", err: err })
         } else {
-            res.json({ status: 1, message: "Following Added Successfully", data: result })
+            console.log(result)
+            axios.post(process.env.APP_URL + "/api/users/follower/add", {
+                userId: req.body.following.userId,
+                follower: {
+                    userId: req.body.userId
+                }
+            }).then(function (response) {
+                res.json({ status: 1, message: "Successfully Followed", data: response })
+            }).catch(function (error) {
+                if (error) {
+                    res.json({ status: 0, message: "Error Occured in API", err: error });
+                }
+            });
         }
     })
 }
@@ -173,8 +188,8 @@ const removeFollowing = async (req, res) => {
 
 const randomUsers = async (req, res) => {
     await User.find().random(req.params.total, true, function (err, users) {
-        if(err) {
-            res.json({status: 0, message: "Error in API"})
+        if (err) {
+            res.json({ status: 0, message: "Error in API" })
         }
         res.json({ status: 1, data: users })
     }).clone();
