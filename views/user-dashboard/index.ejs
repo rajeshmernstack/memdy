@@ -33,7 +33,7 @@
         } else {
             userLoggedIn = true;
         }
-        
+
     </script>
 </head>
 
@@ -152,19 +152,20 @@
         $(document).ready(() => {
 
             if (userLoggedIn && localStorage.getItem('token') != null) {
-            let token = localStorage.getItem('token');
-            $.ajax({
-                url: '<%= process.env.APP_URL %>' + "/api/users/authorized",
-                type: 'GET',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-                },
-                success: function (result) {
-                    userLoggedInData = result.data;
-                },
-                error: function (err) { },
-            });
-        }
+                let token = localStorage.getItem('token');
+                $.ajax({
+                    url: '<%= process.env.APP_URL %>' + "/api/users/authorized",
+                    type: 'GET',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+                    },
+                    success: function (result) {
+                        userLoggedInData = result.data;
+                        localStorage.setItem('userData', JSON.stringify(userLoggedInData));
+                    },
+                    error: function (err) { },
+                });
+            }
 
             function loadAllMemes() {
                 var allMemes = "";
@@ -338,6 +339,15 @@
             })
         }
 
+        // document.getElementById("new_meme").onchange = function () {
+        //     document.getElementById("meme_upload_form").submit();
+        //     $(document).on('submit', '#meme_upload_form', (event) => {
+        //     event.preventDefault();
+        //     console.log("Form Submitted");
+
+        // })
+        // };
+
         function likeTheMeme(mId) {
             $.post('<%= process.env.APP_URL %>' + "/api/memes/likes/add", { memeId: mId, like: { userId: userLoggedInData._id } }, (data, status) => {
                 if (status === "success") {
@@ -351,6 +361,8 @@
                 }
             })
         }
+
+        
     </script>
 </body>
 

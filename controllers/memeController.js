@@ -11,7 +11,10 @@ const allMemes = async (req, res) => {
 }
 
 const publishMeme = async (req, res) => {
+    console.log(req.files)
+    console.log(req.body)
     const newMeme = new Meme(req.body);
+    
     await newMeme.save((err, result) => {
         if (err) {
             res.json({ status: 0, message: "meme did not published successfully", err: err })

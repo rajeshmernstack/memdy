@@ -22,7 +22,10 @@
                 if (userLoggedIn && localStorage.getItem('token') != null) {
                     document.write(`<a href="/design"
                         class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white"> Meme Creator Tool
-                </a>`)
+                </a>
+               `)
+
+            //     <form id="meme_upload_form"><input type="file" id="new_meme" name="new_meme" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white"></form>
                 }else{
                     document.write(`<a href="/login" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">Login</a>
                     <a href="/register" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">Register</a>`)

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 async function main() {
-    await mongoose.connect("mongodb+srv://memdy:memdymemdy@memdy.8dgvrzg.mongodb.net/memdy");
+    await mongoose.connect("mongodb://localhost:27017/memdy");
 }
 
 
@@ -13,8 +13,6 @@ const PayGatewaySchema = new mongoose.Schema({
     payGatewayLogo: { type: String, required: [true, "Payment Gateway Logo is Required"]}
     
 });
-
-
 
 const PaymentGateway = mongoose.model("PaymentGateways", PayGatewaySchema);
 

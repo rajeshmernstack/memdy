@@ -244,6 +244,20 @@ $(document).ready(() => {
     });
 
     $('#meme-export-btn').click(function () {
+        console.log(MemeCanvas.toDataURL({ format: "png", quality: "1" }));
+
+
+        var file = dataURLtoFile(MemeCanvas.toDataURL({ format: "png", quality: '1' }), 'meme10.png');
+        console.log(file);
+        let myId = JSON.parse(localStorage.getItem('userData'))._id;
+        console.log(myId);
+        let memeData = {
+            userId: myId,
+            path: "images/memes/meme10.png",
+            meme: file 
+        }
+        console.log(memeData);
+
         $(this).attr('href', MemeCanvas.toDataURL({ format: "png", quality: '1' }));
         $(this).attr('download', "meme.png");
     });
@@ -274,7 +288,7 @@ $(document).ready(() => {
         MemeCanvas.discardActiveObject().renderAll()
     })
     $('#bring-to-front-btn').click(() => {
-        
+
         let selectedObject = MemeCanvas.getActiveObject();
         MemeCanvas.bringToFront(selectedObject)
         MemeCanvas.discardActiveObject().renderAll()
@@ -289,5 +303,21 @@ $(document).ready(() => {
         });
         MemeCanvas.add(itext);
     });
+
+
 });
 
+function dataURLtoFile(dataurl, filename) {
+
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+}
